@@ -1,30 +1,54 @@
-import React from 'react'; 
+import React from "react";
+import axios from "axios";
+import Movie from "./Movie";
 
 class App extends React.Component {
-  state= {
-    isLoading : true,
-    movies: []
-    };
-  componentDidMount(){
-    setTimeout ( ()=> {
-      this.setState({isLoading : false});
-    }, 6000);
+  state = {
+    isLoading: true,
+    movies: [],
+  };
+
+  getMovies = async () => {
+    const {
+      data: {
+        data: { movies },
+      },
+    } = await axios.get(
+      "https://yts-proxy.nomadcoders1.now.sh/list_movies.json"
+    );
+    console.log(movies);
+    this.setState({ movies: movies, isLoading: false });
+  };
+
+  componentDidMount() {
+    this.getMovies();
   }
+
   render() {
-    const {isLoading} = this.state;
+    const { isLoading, movies } = this.state;
     return (
-      <div>
-        {isLoading ? "Lodaing..." : "we are ready"}
-      </div>
-      );
+      <section class="container"> {/* className으로 수정 */}
+        {isLoading ? (
+          <div class="loader"> {/* className으로 수정 */}
+            <span class="loader_text">Loading...</span>
+          </div>  
+        ) : (
+          movies.map((movie) => {
+            return (
+              <Movie
+                key={movie.id}
+                id={movie.id}
+                year={movie.year}
+                title={movie.title}
+                summary={movie.summary}
+                poster={movie.medium_cover_image}
+              />
+            );
+          })
+        )}
+      </section>
+    );
   }
 }
 
 export default App;
-
-// 클래스 형은 Class 선언, render()함수 선언, Component 상속을 해야하고,
-// 상태관리를 위해 constructor, 생성자 메소드 전언 등…이 필요합니다
-
-// 컴포넌트 실행 순서 : constructor <- render <- comopnentDiMount
-
-//update : state가 변경되다.
