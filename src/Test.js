@@ -2,7 +2,7 @@ import React from "react";
 
 function Test() {
     return(
-        <h3>
+        <h3 style={{color: "#f2f2f2"}}>
             Test file
         </h3>
     );
