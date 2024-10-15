@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import Movie from "./Movie";
 
+ 
 class App extends React.Component {
   state = {
     isLoading: true,
@@ -9,15 +10,31 @@ class App extends React.Component {
   };
 
   getMovies = async () => {
+    const movies = await axios.get("https://api.themoviedb.org/3/movie/popular?language=ko&region=kr&api_key=250604987b9bcb91e2f812b87db35ebf");
+    // const movies1 = await axios.get("https://yts-proxy.nomadcoders1.now.sh/list_movies.json");
+    // console.log(movies1);
+     
+
     const {
       data: {
-        data: { movies },
+        results
       },
     } = await axios.get(
-      "https://yts-proxy.nomadcoders1.now.sh/list_movies.json"
+        "https://api.themoviedb.org/3/movie/popular?language=ko&region=kr&api_key=250604987b9bcb91e2f812b87db35ebf"
+      // "https://yts-proxy.nomadcoders1.now.sh/list_movies.json"
     );
-    console.log(movies);
-    this.setState({ movies: movies, isLoading: false });
+    console.log(results);
+    this.setState({ movies: results, isLoading: false });
+
+    // const { // 예제용 
+    //   data: {
+    //     data: { movies },
+    //   },
+    // } = await axios.get(
+    //   // "https://yts-proxy.nomadcoders1.now.sh/list_movies.json"
+    // );
+    // console.log(movies);
+    // this.setState({ movies: movies, isLoading: false });
   };
 
   componentDidMount() {
@@ -38,10 +55,11 @@ class App extends React.Component {
               <Movie
                 key={movie.id}
                 id={movie.id}
-                year={movie.year}
                 title={movie.title}
-                summary={movie.summary}
-                poster={movie.medium_cover_image}
+                summary={movie.overview}
+                poster={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} // 영화 포스터
+                release_date={movie.release_date} // 영화 개봉일
+                rating={movie.vote_average + "점"} // 영화 평점
               />
             );
           })
