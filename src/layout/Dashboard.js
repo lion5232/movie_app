@@ -28,8 +28,8 @@ import Trending from '../routes/Tv/Trending'; // 경로는 파일 위치에 따�
 import GenreMovies from '../routes/Movie/Genres/GenreMovies'; // 경로는 파일 위치에 따라 조정
 import GenreTvShow from '../routes/Tv/Genres/GenreTvShow'; // 경로는 파일 위치에 따라 조정
 
-
-
+//로고 
+import logo from '../image/favicon.ico';
  
 
 const NAVIGATION = [
@@ -415,6 +415,19 @@ function DashboardLayoutBasic(props) {
       router={router}
       theme={demoTheme}
       window={demoWindow}// window 전달
+      branding={{
+        logo: (
+          <a href="/movie_app/" style={{ display: 'inline-block' }}> {/* 링크 추가 */}
+          <img
+            src={logo} // 임포트한 이미지 사용
+            alt="Your App Logo"
+            style={{ width: '40px', height: 'auto' }} // 필요에 따라 스타일 조정
+          />
+          </a>
+          ),
+        title: '영화 / TV 웹사이트', // 앱 제목
+        description: 'Your App Description', // 앱 설명 (선택 사항)
+      }}
     >
      <DashboardLayout  >
         <DemoPageContent pathname={pathname} /> {/* 현재 경로를 컨텐츠에 전달 */} 

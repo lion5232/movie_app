@@ -56,8 +56,14 @@ const Home = () => {
       await getTvShows();
     };
     fetchData(); // 컴포넌트가 마운트될 때 fetchData를 호출하여 데이터를 가져옴
-  }, [genres]); // 컴포넌트가 처음 마운트될 때만 실행 & genres가 변경될 때마다 실행
+  }, []); // 컴포넌트가 처음 마운트될 때만 실행 & genres가 변경될 때마다 실행
 
+  useEffect(() => {
+    //genres의 키 길이를 체크하여 장르 데이터가 성공적으로 업데이트되었는지 확인합니다. 만약 genres가 비어 있지 않다면, 즉 장르 데이터가 존재한다면 다음 단계로 진행합니다.
+    if (Object.keys(genres).length > 0) { 
+      getTvShows(); // genres가 업데이트되면 영화 데이터도 가져오기
+    }
+  }, [genres]); // genres가 변경될 때마다 실행
   return (
     // JSX를 반환하여 UI를 구성
     <section className="container">
