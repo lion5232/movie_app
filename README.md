@@ -17,6 +17,49 @@ https://api.themoviedb.org/3/movie/popular?language=ko&region=kr&api_key=[API_KE
 - 장르
 https://api.themoviedb.org/3/genre/movie/list?language=ko&region=kr&api_key=[API_KEY]
 
+#### 장르 목록 및 id
+-예시 URL : https://api.themoviedb.org/3/discover/movie?api_key=250604987b9bcb91e2f812b87db35ebf&with_genres=10402&language=ko&region=KR
+```
+case '/reports/act':
+        return <GenreMovies genreId={28} />; // Action 
+      case '/reports/adv':
+        return <GenreMovies genreId={12} />; // Adventure
+      case '/reports/ani':
+        return <GenreMovies genreId={16} />; // Anime
+      case '/reports/com':
+        return <GenreMovies genreId={35} />; // Comedy
+      case '/reports/cri':
+        return <GenreMovies genreId={80} />; // Crime
+      case '/reports/doc':
+        return <GenreMovies genreId={99} />; // Documentary
+      case '/reports/dra':
+        return <GenreMovies genreId={18} />; // Drama
+      case '/reports/fam':
+        return <GenreMovies genreId={10751} />; // Family
+      case '/reports/fan':
+        return <GenreMovies genreId={14} />; // Fantasy
+      case '/reports/his':
+        return <GenreMovies genreId={36} />; // History
+      case '/reports/sca':
+        return <GenreMovies genreId={27} />; // Scary
+      case '/reports/mus':
+        return <GenreMovies genreId={10402} />; // Music
+      case '/reports/mys':
+        return <GenreMovies genreId={9648} />; // Mystery 
+      case '/reports/rom':
+        return <GenreMovies genreId={10749} />; // Romance 
+      case '/reports/sciencefiction':
+        return <GenreMovies genreId={878} />; // SF 
+      case '/reports/tvmovie':
+        return <GenreMovies genreId={10770} />; // TV Movie 
+      case '/reports/thr':
+        return <GenreMovies genreId={53} />; // Thriller 
+      case '/reports/war':
+        return <GenreMovies genreId={10752} />; // War  
+      case '/reports/wes':
+        return <GenreMovies genreId={37} />; // Western 
+```
+
 - 영화상세
 https://api.themoviedb.org/3/movie/496243/credits?&region=kr&language=ko&api_key=[API_KEY]
 

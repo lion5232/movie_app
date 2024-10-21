@@ -2,13 +2,14 @@ import React from "react";
 import {HashRouter, Route, Routes} from "react-router-dom";
 import Home from "./routes/Movie/Home";
 import MovieDetail from "./routes/MovieDetail";
+import TvDetail from "./routes/TvDetail";
 import Navigation from "./components/Navigation";
 import Dashboard from "./layout/Dashboard";
 
 function App() {
   return(
     <HashRouter>
-      <Navigation />
+      {/* <Navigation /> */}
 
       <Routes>
         {/* React Router v6에서는 Route의 component 속성이 아닌 element 속성을 사용, exact 제거 */}
@@ -25,6 +26,7 @@ function App() {
       <Route path="/2"  element={<Home/>} />
 
       <Route path="/movie/:id" element={<MovieDetail/>} />
+      <Route path="/tv/:id" element={<TvDetail/>} />
     
       </Routes>
       </HashRouter>

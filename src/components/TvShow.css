@@ -1,0 +1,70 @@
+.tv-shows .tv-show {
+  /* TV 쇼 목록 */
+  background-color: #8d8888cc;
+  margin-bottom: 70px;
+  font-weight: 300;
+  padding: 20px;
+  border-radius: 5px;
+  color: #f0eded; /* 글자 색상 */
+  box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25),
+    0 8px 16px -8px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);
+}
+
+.tv-shows .tv-show a {
+  display: grid;
+  grid-template-columns: minmax(150px, 1fr) 2fr;
+  grid-gap: 20px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.tv-show img {
+  position: relative;
+  top: -50px;
+  max-width: 150px;
+  width: 100%;
+  margin-right: 30px;
+  box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
+    0 18px 36px -18px rgba(0, 0, 0, 0.3), 0 -12px 36px -8px rgba(0, 0, 0, 0.025);
+}
+
+.tv-show .tv-show__title,
+.tv-show .tv-show__year {
+  margin: 0;
+  font-weight: 300;
+}
+
+.tv-show .tv-show__title {
+  margin-bottom: 5px;
+  font-size: 24px;
+  color: #2c2c2c;
+}
+
+.tv-show .tv-show__genres {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px 0px;
+}
+
+.tv-show__genres li,
+.tv-show .tv-show__year {
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.tv-show__title__link { /* TV 쇼 제목 */
+  font-weight: bolder;
+  color: #030303; /* 제목 색상 */
+  transition: color 0.3s ease, background-color 0.3s ease; /* 부드러운 전환 효과 */
+}
+
+.tv-show__title__link:hover {
+  background-color:  #f0f0f0;
+  padding: 3px; 
+  /* 약간의 패딩 추가 */
+  border-radius: 5px; 
+  /* 둥근 모서리 */
+}

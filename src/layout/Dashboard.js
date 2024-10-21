@@ -3,13 +3,21 @@ import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { createTheme } from '@mui/material/styles';
+
+/**icon */
 import DashboardIcon from '@mui/icons-material/Dashboard'; // dashboard icon
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MovieIcon from '@mui/icons-material/Movie'; // movie icon
 import LiveTvIcon from '@mui/icons-material/LiveTv'; // tv  icon
 import BarChartIcon from '@mui/icons-material/BarChart';
 import DescriptionIcon from '@mui/icons-material/Description';
 import LayersIcon from '@mui/icons-material/Layers';
+import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
+import ChildCareIcon from '@mui/icons-material/ChildCare';
+import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
+import DiamondRoundedIcon from '@mui/icons-material/DiamondRounded';
+import VideoLibraryRoundedIcon from '@mui/icons-material/VideoLibraryRounded';
+import FolderSpecialRoundedIcon from '@mui/icons-material/FolderSpecialRounded';
+
 import { AppProvider } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import Home from '../routes/Movie/Home'; // 경로는 파일 위치에 따라 조정
@@ -20,7 +28,7 @@ import Trending from '../routes/Tv/Trending'; // 경로는 파일 위치에 따�
 import GenreMovies from '../routes/Movie/Genres/GenreMovies'; // 경로는 파일 위치에 따라 조정
 import GenreTvShow from '../routes/Tv/Genres/GenreTvShow'; // 경로는 파일 위치에 따라 조정
 
- 
+
 
  
 
@@ -37,7 +45,7 @@ const NAVIGATION = [
   {
     segment: 'MoviePlaying',
     title: '현재 상영작',
-    icon: <ShoppingCartIcon />,
+    icon: <VideoLibraryRoundedIcon />,
   },
   {
     segment: 'reports',
@@ -57,7 +65,7 @@ const NAVIGATION = [
       {
         segment: 'ani ',
         title: '애니메이션 ',
-        icon: <DescriptionIcon />,
+        icon: <CatchingPokemonIcon />,
       },
       {
         segment: 'com',
@@ -112,7 +120,7 @@ const NAVIGATION = [
       {
         segment: 'rom ',
         title: '로맨스 ',
-        icon: <DescriptionIcon />,
+        icon: <FavoriteBorderRoundedIcon />,
       },
       {
         segment: 'sciencefiction',
@@ -162,7 +170,7 @@ const NAVIGATION = [
       {
         segment: 'Trending',
         title: '트렌드',
-        icon: <DescriptionIcon />,
+        icon: <BarChartIcon />,
       },
       {
         segment: 'top_rated',
@@ -187,7 +195,7 @@ const NAVIGATION = [
       {
         segment: 'Anime',
         title: '애니메이션',
-        icon: <DescriptionIcon />,
+        icon: <CatchingPokemonIcon />,
       },
       {
         segment: 'Comedy',
@@ -217,7 +225,7 @@ const NAVIGATION = [
       {
         segment: 'Kids',
         title: 'Kids',
-        icon: <DescriptionIcon />,
+        icon: <ChildCareIcon />,
       },
       {
         segment: 'mystery',
@@ -296,7 +304,7 @@ function DemoPageContent({ pathname }) {
         return <GenreMovies genreId={36} />; // History
       case '/reports/sca':
         return <GenreMovies genreId={27} />; // Scary
-      case '/reports/mus':
+      case '/reports/mui':
         return <GenreMovies genreId={10402} />; // Music
       case '/reports/mys':
         return <GenreMovies genreId={9648} />; // Mystery 
@@ -362,7 +370,8 @@ function DemoPageContent({ pathname }) {
         alignItems: 'center', // 중앙 정렬
         textAlign: 'center', // 텍스트 중앙정렬
       }}
-    >
+    > 
+       <Typography variant="h6"></Typography> {/* 제목 추가 */}
       {/* <Typography>Dashboard content for {pathname}</Typography> 현재 경로 출력  */}
       {renderContent()} {/* 조건에 따라 다른 컴포넌트를 렌더링 */}
     </Box>
@@ -407,9 +416,8 @@ function DashboardLayoutBasic(props) {
       theme={demoTheme}
       window={demoWindow}// window 전달
     >
-      <DashboardLayout>
-        <DemoPageContent pathname={pathname} /> {/* 현재 경로를 컨텐츠에 전달 */}
-        
+     <DashboardLayout  >
+        <DemoPageContent pathname={pathname} /> {/* 현재 경로를 컨텐츠에 전달 */} 
       </DashboardLayout>
     </AppProvider>
     // preview-end

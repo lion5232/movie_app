@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom"; 
 import axios from "axios";
-import Movie from "../components/Movie";
-import "./MovieDetail.css";
+import TvShow from "../components/TvShow"; // TvShow 컴포넌트를 가져옵니다.
+import "./TvShowDetail.css"; // CSS 파일 이름도 변경할 수 있습니다.
 import defaultImage from '../image/default_image.png';
 
-function MovieDetail() {
+function TvShowDetail() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [movie, setMovie] = useState(location.state || null);
+  const [tvShow, setTvShow] = useState(location.state || null);
   const [genresList, setGenresList] = useState([]);
   const [cast, setCast] = useState([]);
 
   useEffect(() => {
     const fetchGenres = async () => {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/genre/movie/list?api_key=250604987b9bcb91e2f812b87db35ebf&language=ko`
+        `https://api.themoviedb.org/3/genre/tv/list?api_key=250604987b9bcb91e2f812b87db35ebf&language=ko`
       );
       setGenresList(response.data.genres);
     };
@@ -24,28 +24,28 @@ function MovieDetail() {
   }, []);
 
   useEffect(() => {
-    const fetchMovie = async () => {
-      if (!movie) {
-        const movieId = location.pathname.split("/movie/")[1];
+    const fetchTvShow = async () => {
+      if (!tvShow) {
+        const tvShowId = location.pathname.split("/tv/")[1];
         const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${movieId}?api_key=250604987b9bcb91e2f812b87db35ebf&language=ko`
+          `https://api.themoviedb.org/3/tv/${tvShowId}?api_key=250604987b9bcb91e2f812b87db35ebf&language=ko`
         );
-        setMovie(response.data);
+        setTvShow(response.data);
 
         const castResponse = await axios.get(
-          `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=250604987b9bcb91e2f812b87db35ebf&language=ko`
+          `https://api.themoviedb.org/3/tv/${tvShowId}/credits?api_key=250604987b9bcb91e2f812b87db35ebf&language=ko`
         );
         setCast(castResponse.data.cast);
       }
     };
-    fetchMovie();
-  }, [location, movie]);
+    fetchTvShow();
+  }, [location, tvShow]);
 
-  if (!movie) {
-    return <div>No movie found</div>;
+  if (!tvShow) {
+    return <div>No TV show found</div>;
   }
 
-  const genres = movie.genres
+  const genres = tvShow.genres
     .map((genre) => {
       const genreObj = genresList.find((g) => g.id === genre.id);
       return genreObj ? genreObj.name : "";
@@ -58,18 +58,18 @@ function MovieDetail() {
   };
 
   return (
-    <div className="movie-detail-container">
+    <div className="tv-show-detail-container">
       <button className="back-button" onClick={handleGoBack}>
         &#8592; 뒤로 가기
       </button>
-      <Movie
-        key={movie.id}
-        id={movie.id}
-        title={movie.title}
-        summary={movie.overview}
-        poster={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-        release_date={movie.release_date}
-        rating={movie.vote_average + "점"}
+      <TvShow
+        key={tvShow.id}
+        id={tvShow.id}
+        name={tvShow.name} // 영화 제목을 TV 쇼 이름으로 변경
+        summary={tvShow.overview}
+        poster={`https://image.tmdb.org/t/p/w500${tvShow.poster_path}`}
+        first_air_date={tvShow.first_air_date} // 방영일
+        rating={tvShow.vote_average + "점"}
         genres={genres}
       />
 
@@ -89,4 +89,4 @@ function MovieDetail() {
   );
 }
 
-export default MovieDetail;
+export default TvShowDetail;

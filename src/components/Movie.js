@@ -7,6 +7,9 @@ function Movie({ id, title, summary, poster, release_date, rating, genres }) { /
     <div className="movie">
       <img src={poster} alt={title} title={title} style={{ width: '300px', height: 'auto' }} />
       <button> 찜하기 </button>
+      <div> 
+        ddddssssssssssssssssssssssssssssssssssss
+      </div>
       <div className="movie__data">
         <h3 className="movie__title">{title}</h3>
         <h5 className="movie__release">{release_date}</h5>
