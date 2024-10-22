@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -16,23 +16,49 @@ import ChildCareIcon from '@mui/icons-material/ChildCare';
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import DiamondRoundedIcon from '@mui/icons-material/DiamondRounded';
 import VideoLibraryRoundedIcon from '@mui/icons-material/VideoLibraryRounded';
-import FolderSpecialRoundedIcon from '@mui/icons-material/FolderSpecialRounded';
+import FolderSpecialRoundedIcon from '@mui/icons-material/FolderSpecialRounded'; //마이페이지
 
 import { AppProvider } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
+//로그인 페이지
+ 
+import Login from '../routes/Login/Login'// 경로는 파일 위치에 따라 조정
+import MyPage from '../routes/Login/MyPage';
+
+//영화 페이지
 import Home from '../routes/Movie/Home'; // 경로는 파일 위치에 따라 조정
 import MoviePlaying from '../routes/Movie/MoviePlaying'; // 경로는 파일 위치에 따라 조정
+import GenreMovies from '../routes/Movie/Genres/GenreMovies'; // 경로는 파일 위치에 따라 조정
+
+//Tv 페이지
 import TvTopRated from '../routes/Tv/TvTopRated'; // 경로는 파일 위치에 따라 조정
 import TvHome from '../routes/Tv/TvHome'; // 경로는 파일 위치에 따라 조정
 import Trending from '../routes/Tv/Trending'; // 경로는 파일 위치에 따라 조정
-import GenreMovies from '../routes/Movie/Genres/GenreMovies'; // 경로는 파일 위치에 따라 조정
 import GenreTvShow from '../routes/Tv/Genres/GenreTvShow'; // 경로는 파일 위치에 따라 조정
 
 //로고 
 import logo from '../image/favicon.ico';
+
  
 
 const NAVIGATION = [
+  {
+    kind: 'header',
+    title: '로그인',
+  },
+  {
+    segment: 'logout',
+    title: '로그아웃',
+    icon: <LayersIcon />,
+  },
+  {
+    segment: 'myPage',
+    title: '마이페이지',
+    icon: <FolderSpecialRoundedIcon />,
+  },
+  {
+    kind: 'divider',
+  },
   {
     kind: 'header',
     title: '영화',
@@ -160,7 +186,7 @@ const NAVIGATION = [
   {
     segment: 'reports',
     title: '인기 TV 목록',
-    icon: <BarChartIcon />,
+    icon: <LiveTvIcon />,
     children: [
       {
         segment: 'TvHome',
@@ -275,6 +301,11 @@ function DemoPageContent({ pathname }) {
   const renderContent =() => {
     console.log("Current pathname:", pathname);
     switch (pathname) {
+      /**login */
+      case '/logout' :
+        return <Login/>
+      case '/myPage' :
+        return <MyPage/>  
       /**Movie */
       case '/dashboard':
           return <Home />;
@@ -387,6 +418,7 @@ function DashboardLayoutBasic(props) {
   const { window } = props;  // window prop 추출
 
   const [pathname, setPathname] = React.useState('/dashboard'); // 초기 경로 설정
+  const [isLoggedIn, setIsLoggedIn] = useState(!!sessionStorage.getItem("user_id")); // 로그인 상태 초기화
 
   const router = React.useMemo(() => {
     return {
@@ -396,34 +428,52 @@ function DashboardLayoutBasic(props) {
     };
   }, [pathname]);
 
+  
+
+  // 내비게이션 메뉴 수정
+  const navigation = NAVIGATION.map(item => {
+    return {
+      ...item,
+      title: item.segment === 'logout' ? (isLoggedIn ? '로그아웃' : '로그인') : item.title,
+      onClick: item.segment ? () => handleNavigation(item.segment) : undefined,
+    };
+  });
+  
   // Remove this const when copying and pasting into your project.
   const demoWindow = window !== undefined ? window() : undefined;
 
   const handleNavigation = (segment) => {
-    const newPath = segment === 'dashboard' ? '/dashboard' : `/${segment}`;
-    console.log("Navigating to:", newPath);
-    setPathname(newPath); // 새로운 경로 설정
+    if (segment === 'logout') {
+      sessionStorage.removeItem("user_id"); // 세션 삭제
+      alert("로그아웃 되었습니다.");
+      console.log("Logging out and navigating to: /movie_app/login");
+      router.navigate('/movie_app/login'); // 로그인 페이지로 직접 이동
+      window.location.reload(); // 페이지 새로고침
+    } else {
+      const newPath = segment === 'dashboard' ? '/dashboard' : `/${segment}`;
+      console.log("Navigating to:", newPath);
+      setPathname(newPath); // 새로운 경로 설정
+    }
   };
 
+ 
+  
   return (
     // preview-start
     <AppProvider // AppProvider로 앱 감싸기
-       navigation={NAVIGATION.map(item => ({
-        ...item,
-        onClick: item.segment ? () => handleNavigation(item.segment) : undefined,
-      }))}// 내비게이션 메뉴 전달
+      navigation={navigation} // 수정된 내비게이션 메뉴 사용
       router={router}
       theme={demoTheme}
       window={demoWindow}// window 전달
       branding={{
         logo: (
-          <a href="/movie_app/" style={{ display: 'inline-block' }}> {/* 링크 추가 */}
+           
           <img
             src={logo} // 임포트한 이미지 사용
             alt="Your App Logo"
             style={{ width: '40px', height: 'auto' }} // 필요에 따라 스타일 조정
           />
-          </a>
+          
           ),
         title: '영화 / TV 웹사이트', // 앱 제목
         description: 'Your App Description', // 앱 설명 (선택 사항)
