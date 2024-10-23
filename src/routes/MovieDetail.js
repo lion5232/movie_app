@@ -57,6 +57,8 @@ function MovieDetail() {
     navigate(-1);
   };
 
+
+
   return (
     <div className="movie-detail-container">
       <button className="back-button" onClick={handleGoBack}>

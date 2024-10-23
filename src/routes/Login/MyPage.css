@@ -1,0 +1,16 @@
+.favorites-container {
+    display: flex;
+    flex-wrap: wrap; /* 항목을 줄 바꿈 가능하게 설정 */
+    justify-content: space-between; /* 항목 사이의 간격 조정 */
+  }
+  
+  .movie-item {
+    width: calc(50% - 10px); /* 두 개씩 표시되도록 너비 설정 */
+    margin-bottom: 20px; /* 아래쪽 여백 */
+  }
+  
+  .movie-poster {
+    width: 40%; /* 포스터가 항목의 너비에 맞게 조정 */
+    height: 80%; /* 비율 유지 */
+  }
+  

@@ -435,26 +435,14 @@ function DashboardLayoutBasic(props) {
     return {
       ...item,
       title: item.segment === 'logout' ? (isLoggedIn ? '로그아웃' : '로그인') : item.title,
-      onClick: item.segment ? () => handleNavigation(item.segment) : undefined,
+       
     };
   });
   
   // Remove this const when copying and pasting into your project.
   const demoWindow = window !== undefined ? window() : undefined;
 
-  const handleNavigation = (segment) => {
-    if (segment === 'logout') {
-      sessionStorage.removeItem("user_id"); // 세션 삭제
-      alert("로그아웃 되었습니다.");
-      console.log("Logging out and navigating to: /movie_app/login");
-      router.navigate('/movie_app/login'); // 로그인 페이지로 직접 이동
-      window.location.reload(); // 페이지 새로고침
-    } else {
-      const newPath = segment === 'dashboard' ? '/dashboard' : `/${segment}`;
-      console.log("Navigating to:", newPath);
-      setPathname(newPath); // 새로운 경로 설정
-    }
-  };
+ 
 
  
   

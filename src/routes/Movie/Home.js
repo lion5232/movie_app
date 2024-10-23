@@ -3,6 +3,7 @@ import axios from "axios";
 import MovieLink from "../../components/MovieLink";
 import "./Home.css";
 
+
 // Home은 데이터 fetching 및 상태 관리를 담당
 // 여기는 메인 홈페이지 입니다. 인기 있는 영화 목록을 보여 줍니다.
 const Home = () => {
