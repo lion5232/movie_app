@@ -1,0 +1,42 @@
+/* search.css */
+
+.SearchContainer {
+  display: flex;
+  flex-wrap: wrap; /* 아이템이 줄 바꿈 되도록 설정 */
+  justify-content: space-between; /* 아이템 사이에 공간을 배분 */
+  margin: 0 -10px; /* 양쪽 공백 제거 */
+}
+
+.result-item {
+  flex: 0 1 calc(50% - 20px); /* 2열 그리드 (각 아이템 너비 50%) */
+  margin: 10px; /* 각 아이템 사이의 간격 */
+  box-sizing: border-box; /* 패딩과 마진 포함 */
+}
+
+.title {
+  cursor: pointer;
+  text-align: center; /* 제목 중앙 정렬 */
+}
+
+img {
+  max-width: 100%; /* 이미지가 컨테이너에 맞게 조정 */
+  height: auto; /* 비율 유지 */
+}
+
+.title {
+  /* TV 쇼 제목 */
+  font-weight: bolder;
+  color: #030303;
+  /* 제목 색상 */
+  transition: color 0.3s ease, background-color 0.3s ease;
+  /* 부드러운 전환 효과 */
+}
+
+.title:hover {
+  background-color: #f0f0f0;
+  padding: 3px;
+  /* 약간의 패딩 추가 */
+  border-radius: 5px;
+  /* 둥근 모서리 */
+}
+

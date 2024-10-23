@@ -23,7 +23,7 @@ const Login = () => {
       return;
     }
 
-    axios.post("http://localhost:8080/api/login", {
+    axios.post("http://192.168.123.100:8080/api/login", {
       email: inputId,
       password: inputPw,
     })
@@ -31,7 +31,7 @@ const Login = () => {
       console.log(res);
       if (res.data.email === undefined) {
         alert("입력하신 ID가 일치하지 않습니다.");
-      } else if (res.data.email === null) {
+      } else if (res.data.password === undefined) {
         alert("입력하신 비밀번호가 일치하지 않습니다.");
       } else {
         console.log("로그인 성공");

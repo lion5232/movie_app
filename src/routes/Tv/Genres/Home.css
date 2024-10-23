@@ -54,3 +54,31 @@
   /* .movie {
     margin-left:50px;
   } */
+
+ 
+  
+  .load-more {
+    display: grid; /* 그리드 레이아웃 적용 */
+    grid-template-columns: 1fr; /* 한 열로 설정 */
+    width: 890px; /* 전체 너비 사용 */
+    margin: 20px 0; /* 상하 여백 추가 */
+    padding: 10px; /* 패딩 추가 */
+    justify-items: center; /* 아이템 중앙 정렬 */
+  }
+  
+  .load-more button {
+    width: 100%; /* 버튼이 전체 너비 사용 */
+    padding: 15px; /* 버튼 패딩 */
+    font-size: 16px; /* 버튼 글씨 크기 */
+  }
+  
+  .load-more:hover {
+    background-color: #7b777767; /* 호버 시 색상 변화 */
+  }
+  @media screen and (max-width: 1090px) {
+    .load-more {
+      grid-template-columns: 1fr;
+      width: 100%;
+    }
+  }
+ 

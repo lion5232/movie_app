@@ -39,6 +39,8 @@ import GenreTvShow from '../routes/Tv/Genres/GenreTvShow'; // 경로는 파일 �
 //로고 
 import logo from '../image/favicon.ico';
 
+//검색
+import Search from '../routes/Search/Search';
  
 
 const NAVIGATION = [
@@ -54,6 +56,11 @@ const NAVIGATION = [
   {
     segment: 'myPage',
     title: '마이페이지',
+    icon: <FolderSpecialRoundedIcon />,
+  },
+  {
+    segment: 'search',
+    title: '검색',
     icon: <FolderSpecialRoundedIcon />,
   },
   {
@@ -306,6 +313,8 @@ function DemoPageContent({ pathname }) {
         return <Login/>
       case '/myPage' :
         return <MyPage/>  
+      case '/search' :
+        return <Search/>  
       /**Movie */
       case '/dashboard':
           return <Home />;
