@@ -12,7 +12,7 @@ const Signup = () => {
     const handleSignup = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://192.168.0.253:8080/api/signup', {
+            const response = await axios.post('http://192.168.0.9:8080/api/signup', {
                 email,
                 password,
                 name,

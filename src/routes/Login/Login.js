@@ -23,7 +23,7 @@ const Login = () => {
       return;
     }
 
-    axios.post("http://192.168.0.253:8080/api/login", {
+    axios.post("http://192.168.0.9:8080/api/login", {
       email: inputId,
       password: inputPw,
     })
