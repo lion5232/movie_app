@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { createTheme } from '@mui/material/styles';
+import { createTheme , ThemeProvider } from '@mui/material/styles';
 
 /**icon */
 import DashboardIcon from '@mui/icons-material/Dashboard'; // dashboard icon
@@ -41,6 +41,9 @@ import logo from '../image/favicon.ico';
 
 //검색
 import Search from '../routes/Search/Search';
+
+import './Dashboard.css';
+
  
 
 const NAVIGATION = [
@@ -285,20 +288,29 @@ const NAVIGATION = [
  
 ];
 
-//테마 설정 - 어둡게 밝게
-const demoTheme = createTheme({
-  cssVariables: {
-    colorSchemeSelector: 'data-toolpad-color-scheme',
-  },
-  colorSchemes: { light: true, dark:true},
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 600,
-      lg: 1200,
-      xl: 1536,
-    },
+//테마 설정 - 어둡게 밝게 - 나중에 여기 알아보기
+// const demoTheme = createTheme({
+//   cssVariables: {
+//     colorSchemeSelector: 'data-toolpad-color-scheme',
+//   },
+//   colorSchemes: {
+//     dark: true, // 어두운 테마만 사용
+//   },
+//   breakpoints: {
+//     values: {
+//       xs: 0,
+//       sm: 600,
+//       md: 600,
+//       lg: 1200,
+//       xl: 1536,
+//     },
+//   },
+// });
+
+// 어두운 테마 생성
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark', // 어두운 테마로 설정
   },
 });
 
@@ -457,29 +469,31 @@ function DashboardLayoutBasic(props) {
   
   return (
     // preview-start
-    <AppProvider // AppProvider로 앱 감싸기
-      navigation={navigation} // 수정된 내비게이션 메뉴 사용
-      router={router}
-      theme={demoTheme}
-      window={demoWindow}// window 전달
-      branding={{
-        logo: (
-           
-          <img
-            src={logo} // 임포트한 이미지 사용
-            alt="Your App Logo"
-            style={{ width: '40px', height: 'auto' }} // 필요에 따라 스타일 조정
-          />
-          
-          ),
-        title: '영화 / TV 웹사이트', // 앱 제목
-        description: 'Your App Description', // 앱 설명 (선택 사항)
-      }}
-    >
-     <DashboardLayout  >
-        <DemoPageContent pathname={pathname} /> {/* 현재 경로를 컨텐츠에 전달 */} 
-      </DashboardLayout>
-    </AppProvider>
+    <ThemeProvider theme={darkTheme}>
+      <AppProvider // AppProvider로 앱 감싸기
+        navigation={navigation} // 수정된 내비게이션 메뉴 사용
+        router={router}
+        // theme={demoTheme}
+        window={demoWindow}// window 전달
+        branding={{
+          logo: (
+            
+            <img
+              src={logo} // 임포트한 이미지 사용
+              alt="Your App Logo"
+              style={{ width: '40px', height: 'auto' }} // 필요에 따라 스타일 조정
+            />
+            
+            ),
+          title: '영화 / TV 웹사이트', // 앱 제목
+          description: 'Your App Description', // 앱 설명 (선택 사항)
+        }}
+      >
+      <DashboardLayout  >
+          <DemoPageContent pathname={pathname} /> {/* 현재 경로를 컨텐츠에 전달 */} 
+        </DashboardLayout>
+      </AppProvider>
+    </ThemeProvider>
     // preview-end
   );
 }
